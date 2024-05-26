@@ -1,0 +1,288 @@
+{
+  "de": "Deutsch",
+  "Page": {
+    "Search": "Suche..."
+  },
+  "Login": {
+    "Title": "Anmelden",
+    "Header": "Anmelden",
+    "EmailAdress": "E-Mail Adresse",
+    "Password": "Passwort",
+    "ForgotPassword": "Passwort vergessen?",
+    "OauthRegister": "Dein Account wurde erstellt, dir wurde eine E-Mail gesendet.",
+    "Button": {
+      "Remember": "Angemeldet bleiben",
+      "SignIn": "Anmelden",
+      "Error": {
+        "401": "E-Mail Adresse oder Passwort falsch",
+        "403": "Gesperrter Account",
+        "423": "E-Mail Adresse nicht bestätigt",
+        "500": "Serverfehler"
+      }
+    },
+    "Or": "Oder",
+    "OAuth": {
+      "LoginWGithub": "Mit Github anmelden",
+      "LoginWGoogle": "Mit Google anmelden"
+    },
+    "SignUPPhrase": "Sie haben noch keinen Account?",
+    "Placeholder": {
+      "EmailAdress": "E-Mail Adresse",
+      "Password": "Passwort"
+    }
+  },
+  "Register": {
+    "Titel": "Registrieren",
+    "HeadlineNewAcc": "Neuen Account erstellen",
+    "Username": "Benutzername",
+    "Password1": "Passwort",
+    "Password2": "Passwort wiederholen",
+    "Password": "Passwort",
+    "CreateNewAccount": "Neuen Account erstellen",
+    "GotAccount": "Sie haben bereits einen Account?",
+    "Legal": "Akzeptiere die Nutzungsbedingungen und Datenschutzrichtlinien",
+    "Success": "E-Mail wurde versendet, bitte überprüfe dein Postfach.",
+    "Placeholder": {
+      "Username": "Benutzername"
+    },
+    "Error": {
+      "401": "Benuztername oder E-Mail Adresse bereits vergeben"
+    }
+  },
+  "RegisterVerify": {
+    "Title": "Account verifizieren",
+    "Headline": "Bestätige deinen Account mit dem klick auf den Knopf.",
+    "VerifyMail": "E-Mail bestätigen",
+    "Success": "E-Mail erfolgreich bestätigt, du wirst gleich weitergeleitet."
+  },
+  "ResetPassword": {
+    "Title": "Passwort zurücksetzen",
+    "ResetPassword": "Passwort zurücksetzen",
+    "Email": "E-Mail Adresse",
+    "EnterIdentifyer": "Gib deine E-Mail Adresse oder Benutzernamen ein",
+    "TakeMeBack": "Zurück zur Anmeldung",
+    "Success": "Fals diese Email existiert, wird eine E-Mail an dich gesendet.",
+    "SuccessReset": "Passwort erfolgreich zurückgesetzt, du wirst gleich weitergeleitet.",
+    "Button": {
+      "ResetPassword": "Passwort zurücksetzen"
+    }
+  },
+  "Dashboard": {
+    "Header": {
+      "Pagename": "VAG - Dienstkleidung",
+      "Profile": {
+        "Profile": "Profil",
+        "Settings": "Einstellungen",
+        "Logout": "Abmelden"
+      },
+      "Navbar": {
+        "Home": "Shop",
+        "YourOders": "Deine Bestellungen",
+        "AdminOders": "Bestellungen",
+        "AdminInventory": "Lagerbestand",
+        "AdminUserManagment": "Nutzerverwaltung",
+        "Services": {
+          "Name": "Dienste",
+          "Game": "Spiele Server",
+          "Vm": "VM Server"
+        }
+      },
+      "Buttons": {
+        "ToggleColor": {
+          "Light": "Helle Ansicht",
+          "Dark": "Dunkle Ansicht"
+        },
+        "Credit_one": "{{count}} Punkt",
+        "Credit_other": "{{count}} Punkte"
+      }
+    },
+    "Footer": {
+      "Links": {
+        "Guidelines": "Richtlinien",
+        "Imprint": "Impressum",
+        "Privacy": "Datenschutz"
+      }
+    }
+  },
+  "Settings": {
+    "Side": {
+      "Account": "Account",
+      "Misc": "Design, Sprache & Sonstiges",
+      "Links": "Verlinkbare Seiten"
+    },
+    "Main": {
+      "SettingsName": "Account Einstellungen",
+      "ProfileHeadline": "Profil Einstellungen",
+      "AccountHeadline": "Account Einstellungen",
+      "PasswordHeadline": "Passwort Einstellungen",
+      "Username": "Benutzername",
+      "Email": "E-Mail Adresse",
+      "FirstName": "Vorname",
+      "LastName": "Nachname",
+      "PasswordOld": "Altes Passwort",
+      "PasswordRepeat": "Passwort wiederholen",
+      "PasswordNew": "Neues Passwort",
+      "Button": {
+        "SetPassword": "Passwort ändern",
+        "PrivacyActive": "Privatsphäre aktiviert",
+        "PrivacyDeactive": "Privatsphäre deaktiviert"
+      },
+      "Error": {
+        "Password": {
+          "NoPassword": "Du hast kein Passwort",
+          "Empty": "Bitte gib ein Passwort ein",
+          "NotEqual": "Die Passwörter stimmen nicht überein",
+          "Unknown": "Ein unbekannter Fehler ist aufgetreten",
+          "Wrong": "Das Passwort ist falsch",
+          "401": "Altes Passwort falsch",
+          "500": "Serverfehler"
+        }
+      },
+      "Success": {
+        "Password": "Passwort erfolgreich geändert"
+      }
+    },
+    "Misc": {
+      "SettingsName": "Misc Einstellungen",
+      "DesignLangHeadline": "Design & Sprache",
+      "Language": "Sprache",
+      "Layout": "Layout",
+      "LayoutOptions": {
+        "Fluid": "Vollbild",
+        "Center": "Zenriert"
+      },
+      "NavBarLock": "Navigation fixieren",
+      "NavBarLockOptions": {
+        "Top": "Oben",
+        "Side": "Seite"
+      }
+    },
+    "Profile": {
+      "AvatarIcon": "Avatar Icon",
+      "SetAvatarIcon": "NOT IMPLEMENTED",
+      "DeleteAvatarIcon": "Avatar löschen"
+    }
+  },
+  "Inventory": {
+    "Body": {
+      "Head": {
+        "AddButton": "Neues Produkt hinzufügen"
+      }
+    }
+  },
+  "Admin": {
+    "Headlines": {
+      "Userlist": "Nutzerverwaltung",
+      "Inventory": "Lagerbestand",
+      "Orders": "Bestellungen"
+    },
+    "Page": {
+      "Userlist": {
+        "Table": {
+          "FirstName": "Vorname",
+          "LastName": "Nachname",
+          "Username": "Benutzername",
+          "Email": "E-Mail Adresse",
+          "UserGroup": "Gruppe",
+          "Credit": "Punktestand"
+        }
+      },
+      "Inventory": {
+        "Modal": {
+          "AddNew": {
+            "Title": "Neues Produkt hinzufügen",
+            "ProductImg": "Produktbild",
+            "Article": "Artikel Name",
+            "ArticleType": "Artikeltyp",
+            "ArticleType_TShirt": "T-Shirt",
+            "ArticleType_Polo": "Polo",
+            "ArticleType_Hoodie": "Hoodie",
+            "ArticleType_Jacket": "Jacke",
+            "ArticleType_Pants": "Hose",
+            "ArticleType_Shorts": "Shorts",
+            "ArticleType_Socks": "Socken",
+            "ArticleType_Shoes": "Schuhe",
+            "ArticleType_Cap": "Kappe",
+            "ArticleType_Bag": "Tasche",
+            "ArticleType_Accessoires": "Accessoires",
+            "Gender": "Geschlecht",
+            "Gender_Both": "Unisex",
+            "Gender_Female": "Frauen",
+            "Gender_Male": "Männer",
+            "ArticleNumber": "Artikel Nummer",
+            "Price": "Preis",
+            "Stock": "Lagerbestand",
+            "Stock_xs": "Lagerbestand XS",
+            "Stock_s": "Lagerbestand S",
+            "Stock_m": "Lagerbestand M",
+            "Stock_l": "Lagerbestand L",
+            "Stock_xl": "Lagerbestand XL",
+            "Stock_xxl": "Lagerbestand XXL",
+            "Description": "Beschreibung",
+            "AddButton": "Produkt hinzufügen",
+            "CancelButton": "Abbrechen",
+            "Placeholder": {
+              "Article": "Artikel",
+              "ArticleNumber": "Artikel Nummer",
+              "Price": "Preis",
+              "Stock": "Lagerbestand",
+              "Description": "Beschreibung"
+            }
+          }
+        },
+        "Table": {
+          "Article": "Artikel",
+          "ArticleType": "Artikeltyp",
+          "ArticleNumber": "Artikelnummer",
+          "Price": "Preis",
+          "Stock_xs": "XS",
+          "Stock_s": "S",
+          "Stock_m": "M",
+          "Stock_l": "L",
+          "Stock_xl": "XL",
+          "Stock_xxl": "XXL"
+        }
+      }
+    }
+  },
+  "Error": {
+    "Joi": {
+      "string": {
+        "empty": "{{field}} darf nicht leer sein",
+        "min": "{{field}} muss mindestens {{limit}} Zeichen lang sein",
+        "max": "{{field}} darf höchstens {{limit}} Zeichen lang sein",
+        "email": "{{field}} muss eine gültige E-Mail-Adresse sein",
+        "alphanum": "{{field}} darf nur a-Z & 0-9 enthalten",
+        "pattern": {
+          "base": "{{field}} muss dem erforderlichen Muster entsprechen"
+        }
+      },
+      "number": {
+        "base": "{{field}} muss eine Zahl sein",
+        "min": "{{field}} muss größer oder gleich {{limit}} sein",
+        "max": "{{field}} muss kleiner oder gleich {{limit}} sein"
+      },
+      "date": {
+        "base": "{{field}} muss ein gültiges Datum sein",
+        "min": "Das Datum von {{field}} muss nach dem {{limit}} liegen",
+        "max": "Das Datum von {{field}} muss vor dem {{limit}} liegen"
+      },
+      "any": {
+        "required": "{{field}} ist erforderlich",
+        "only": "{{field}} darf nur {{valids}} sein"
+      },
+      "required": "{{field}} ist erforderlich"
+    },
+    "NewEventApplyBeforeStart": "Das Anmelde Datum muss vor dem Start Datum liegen",
+    "NewEventEndBeforeStart": "Das Start Datum muss vor dem End Datum liegen",
+    "PasswordMatch": "Passwörter stimmen nicht überein"
+  },
+  "User_Groups": {
+    "reg": "Mitarbeiter",
+    "admin": "Administrator",
+    "virtualGroups": {
+      "reg": "Registrierte Nutzer",
+      "member": "Mitarbeiter"
+    }
+  }
+}
