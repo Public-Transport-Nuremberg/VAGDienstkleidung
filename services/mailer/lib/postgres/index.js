@@ -21,6 +21,7 @@ const pool = new db.Pool({
  * @returns {UserObject}
  */
 const GetUserData = (userId) => {
+  if (!userId) throw new Error('User ID is required');
   return new Promise((resolve, reject) => {
     pool.query('SELECT email, username, language FROM users JOIN users_settings ON users.id = users_settings.user_id WHERE id = $1', [userId], (err, res) => {
       if (err) { reject(err); }

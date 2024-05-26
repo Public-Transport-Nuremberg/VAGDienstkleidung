@@ -129,7 +129,10 @@ const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-const generatePagination = (totalItems, pageSize, currentPage, callFunction) => {
+const generatePagination = async (currentPage, pageSize, callFunction) => {
+    const api_data = await callFunction(currentPage, pageSize);
+    const totalItems = api_data.totalItems;
+
     const totalPages = Math.ceil(totalItems / pageSize);
     let paginationHTML = '<ul style="margin-top: 10px;" class="pagination">';
 
@@ -158,16 +161,14 @@ const generatePagination = (totalItems, pageSize, currentPage, callFunction) => 
 
     document.getElementById('paginationContainer').innerHTML = paginationHTML;
 
-    callFunction(1, pageSize);
-
     // Add click event listener to all pagination links
     document.querySelectorAll('#paginationContainer .page-link').forEach(link => {
         link.addEventListener('click', function (e) {
             e.preventDefault();
             const page = parseInt(this.getAttribute('data-page'), 10);
             if (page > 0 && page <= totalPages) {
-                generatePagination(totalItems, pageSize, page, callFunction);
                 callFunction(page, pageSize);
+                generatePagination(page, pageSize, callFunction);
             }
         });
     });

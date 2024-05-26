@@ -94,6 +94,7 @@ app.get('/*', (req, res) => {
         ejs.renderFile(path.join(__dirname, '..', 'views', 'error', 'error-xxx.ejs'), { statusCode: 404, message: "Page not found", info: "Request can not be served", reason: "The requested page was not found", domain: process.env.DOMAIN, back_url: process.env.DOMAIN }, (err, str) => {
             if (err) throw err;
             res.header('Content-Type', 'text/html');
+            res.status(404);
             res.send(str);
         });
     };

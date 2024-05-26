@@ -45,13 +45,6 @@ const LastNameCheck = Joi.object({
     last_name: Joi.string().min(2).max(32).pattern(/^[a-zA-Z0-9_]*$/).required(),
 });
 
-// Validate likable accounts, so it needs to accept profile links, usernames and user ids
-const LinkCheck = Joi.object({
-    platform: Joi.string().valid(...Object.keys(process.linkableapps)).required(),
-    value: Joi.string().min(1).pattern(/^[a-zA-Z0-9_]*$/).required(),
-});
-
-
 router.post('/layout', verifyRequest('web.user.layout.write'), limiter(10), async (req, res) => {
     const value = await LayoutCheck.validateAsync(await req.json());
     if (!value) throw new InvalidRouteInput('Invalid Route Input');
@@ -125,6 +118,18 @@ router.get('/', verifyRequest('web.user.settings.read'), limiter(2), async (req,
         last_name: user_response.last_name,
         bio: user_response.bio,
         public: user_response.public,
+    });
+});
+
+router.get('/credit', verifyRequest('web.user.credit.read'), limiter(2), async (req, res) => {
+    const user_responses = await user.get(req.user.user_id);
+    if (!user_responses || user_responses.length === 0) throw new InvalidRouteInput('Unknown User');
+
+    const user_response = user_responses[0];
+
+    res.status(200);
+    res.json({
+        credit: user_response.credit,
     });
 });
 

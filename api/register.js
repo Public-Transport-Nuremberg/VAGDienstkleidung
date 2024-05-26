@@ -44,6 +44,8 @@ router.post('/', async (req, res) => {
         }
     });
 
+    console.log(userId);
+
     const urlPath = generateUrlPath();
 
     // Send E-Mail Verification

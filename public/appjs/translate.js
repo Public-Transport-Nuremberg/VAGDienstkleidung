@@ -36,6 +36,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
+    fetch('/api/v1/user/credit', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+    }).then(response => response.json()).then(data => {
+        if (data.credit != undefined) {
+            document.getElementById('UserCreditamount').innerText = i18next.t('Dashboard.Header.Buttons.Credit', { count: Number(data.credit) });
+        }
+    }).catch((error) => {
+        console.error('Error:', error);
+    });
+
     /* Translate all elements marked with spesific html tags */
     document.querySelectorAll("[data-translate]").forEach((element) => {
         const key = element.getAttribute("data-translate");
@@ -68,23 +82,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     // Generate the Profile dropdown
-    if(document.getElementById('Dashboard.ProfileDropdown') != undefined) {
+    if (document.getElementById('Dashboard.ProfileDropdown') != undefined) {
         const dropdown = document.getElementById('Dashboard.ProfileDropdown');
 
-        if(checkPermission('app.user.profile.*').result) {
-            dropdown.innerHTML += `<a href="/profile" class="dropdown-item">${i18next.t('Dashboard.Header.Profile.Profile')}</a>`;
-        }
-        if(checkPermission('app.user.settings.*').result) {
+        if (checkPermission('app.user.settings.*').result) {
             dropdown.innerHTML += `<a href="/settings-account" class="dropdown-item">${i18next.t('Dashboard.Header.Profile.Settings')}</a>`;
         }
         dropdown.innerHTML += `<div class="dropdown-divider"></div>`;
-        if(checkPermission('app.web.logout').result) {
+        if (checkPermission('app.web.logout').result) {
             dropdown.innerHTML += `<a onClick="logout()" class="dropdown-item">${i18next.t('Dashboard.Header.Profile.Logout')}</a>`;
         }
     }
 
     // Generate Navbar
-    if(document.getElementById('Dashboard.Navbar.Elements') != undefined) {
+    if (document.getElementById('Dashboard.Navbar.Elements') != undefined) {
         const navbar = document.getElementById('Dashboard.Navbar.Elements');
 
         // Add Home
@@ -98,7 +109,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         </li>`
 
         // Add orders list (User)
-        if(checkPermission('app.shop.user.orders.*').result) {
+        if (checkPermission('app.shop.user.orders.*').result) {
             navbar.innerHTML += `
             <li class="nav-item">
                 <a class="nav-link" href="/orders" >
@@ -110,7 +121,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         // Add orders list (Admin)
-        if(checkPermission('app.shop.admin.orders.*').result) {
+        if (checkPermission('app.shop.admin.orders.*').result) {
             navbar.innerHTML += `
             <li class="nav-item">
                 <a class="nav-link" href="/admin/orders" >
@@ -122,22 +133,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         // Add inventory list
-        if(checkPermission('app.shop.admin.inventory.*').result) {
+        if (checkPermission('app.shop.admin.inventory.*').result) {
             navbar.innerHTML += `
             <li class="nav-item">
                 <a class="nav-link" href="/admin/inventory" >
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                 <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-building-warehouse"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 21v-13l9 -4l9 4v13" /><path d="M13 13h4v8h-10v-6h6" /><path d="M13 21v-9a1 1 0 0 0 -1 -1h-2a1 1 0 0 0 -1 1v3" /></svg></span>
-                    <span class="nav-link-title">${i18next.t('Dashboard.Header.Navbar.AdminUserManagment')}</span>
+                    <span class="nav-link-title">${i18next.t('Dashboard.Header.Navbar.AdminInventory')}</span>
                 </a>
             </li>`
         }
 
         // Add users list
-        if(checkPermission('app.shop.admin.users.*').result) {
+        if (checkPermission('app.shop.admin.users.*').result) {
             navbar.innerHTML += `
             <li class="nav-item">
-                <a class="nav-link" href="/admin/users" >
+                <a class="nav-link" href="/admin/userlist" >
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                 <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-users"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /></svg></span>
                     <span class="nav-link-title">${i18next.t('Dashboard.Header.Navbar.AdminUserManagment')}</span>
