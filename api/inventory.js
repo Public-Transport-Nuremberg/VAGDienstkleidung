@@ -41,6 +41,19 @@ const inventorySchema = Joi.object({
     stock_xxl: Joi.number().integer().min(0).max(100_000).required()
 });
 
+const inventoryIdSchema = Joi.object({
+    id: Joi.number().integer().min(1).required()
+});
+
+const inventoryStockSchema = Joi.object({
+    id: Joi.number().integer().min(1).required(),
+    stock: Joi.string().valid('price', 'stock_xs', 'stock_s', 'stock_m', 'stock_l', 'stock_xl', 'stock_xxl').required()
+});
+
+const inventoryStockSetSchema = Joi.object({
+    new_val: Joi.number().integer().min(0).max(100_000).required()
+});
+
 router.get('/', verifyRequest('web.admin.inventory.read'), limiter(1), async (req, res) => {
     try {
         const { page, limit, sort, order, search } = await inventoryListQuerySchema.validateAsync(req.query);
@@ -64,6 +77,24 @@ router.post('/', verifyRequest('web.admin.inventory.create'), limiter(1), async 
     if (!sql_response) throw new Error('Failed to create inventory item');
 
     res.status(200).json({ message: 'Inventory item created' });
+});
+
+router.delete('/:id', verifyRequest('web.admin.inventory.write'), limiter(1), async (req, res) => {
+    const { id } = await inventoryIdSchema.validateAsync(req.params);
+
+    const sql_response = await shop.inventory.delete(id);
+    if (!sql_response) throw new Error('Failed to delete inventory item');
+
+    res.status(200).json({ message: 'Inventory item deleted' });
+});
+
+router.post('/:id/:stock/set', verifyRequest('web.admin.inventory.write'), limiter(1), async (req, res) => {
+    const { id, stock } = await inventoryStockSchema.validateAsync(req.params);
+    const { new_val } = await inventoryStockSetSchema.validateAsync(await req.json());
+
+    const sql_response = await shop.inventory.setCollumValue(id, stock, new_val);
+
+    res.status(200).json({ [stock]: sql_response[stock] });
 });
 
 module.exports = {

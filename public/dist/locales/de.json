@@ -221,6 +221,7 @@
             "Description": "Beschreibung",
             "AddButton": "Produkt hinzufügen",
             "CancelButton": "Abbrechen",
+            "DelButton": "Produkt löschen",
             "Placeholder": {
               "Article": "Artikel",
               "ArticleNumber": "Artikel Nummer",

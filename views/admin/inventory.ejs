@@ -176,7 +176,7 @@
                 <div class="d-flex">
                   <div class="me-3">
                     <div class="input-icon">
-                      <input type="text" value="" class="form-control" id="PageSearch" onkeypress="debouncedLoadPage()" onchange="loadTable()" data-translate-placeholder="Page.Search" placeholder="">
+                      <input type="text" value="" class="form-control" id="PageSearch" onkeypress="debounce()" onchange="loadTable()" data-translate-placeholder="Page.Search" placeholder="">
                       <span class="input-icon-addon">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
                       </span>
@@ -419,19 +419,21 @@
                 <td class="sort-article">${item.article}</td>
                 <td class="sort-article_type">${item.article_type}</td>
                 <td class="sort-article_number">${item.article_number}</td>
-                <td class="sort-price"><input type="number" class="form-control editable" value="${item.price}" data-id="price/${item.id}"></td>
-                <td class="sort-stock_xs"><input type="number" class="form-control editable" value="${item.stock_xs}" data-id="stock_xs/${item.id}"></td>
-                <td class="sort-stock_s"><input type="number" class="form-control editable" value="${item.stock_s}" data-id="stock_s/${item.id}"></td>
-                <td class="sort-stock_m"><input type="number" class="form-control editable" value="${item.stock_m}" data-id="stock_m/${item.id}"></td>
-                <td class="sort-stock_l"><input type="number" class="form-control editable" value="${item.stock_l}" data-id="stock_l/${item.id}"></td>
-                <td class="sort-stock_xl"><input type="number" class="form-control editable" value="${item.stock_xl}" data-id="stock_xl/${item.id}"></td>
-                <td class="sort-stock_xxl"><input type="number" class="form-control editable" value="${item.stock_xxl}" data-id="stock_xxl/${item.id}"></td>
+                <td class="sort-price"><input type="text" class="form-control editable" value="${item.price}" data-id="price/${item.id}"></td>
+                <td class="sort-stock_xs"><input type="text" class="form-control editable" value="${item.stock_xs}" data-id="stock_xs/${item.id}"></td>
+                <td class="sort-stock_s"><input type="text" class="form-control editable" value="${item.stock_s}" data-id="stock_s/${item.id}"></td>
+                <td class="sort-stock_m"><input type="text" class="form-control editable" value="${item.stock_m}" data-id="stock_m/${item.id}"></td>
+                <td class="sort-stock_l"><input type="text" class="form-control editable" value="${item.stock_l}" data-id="stock_l/${item.id}"></td>
+                <td class="sort-stock_xl"><input type="text" class="form-control editable" value="${item.stock_xl}" data-id="stock_xl/${item.id}"></td>
+                <td class="sort-stock_xxl"><input type="text" class="form-control editable" value="${item.stock_xxl}" data-id="stock_xxl/${item.id}"></td>
+                <td><button class="btn btn-danger" onclick="deleteRow(${item.id})">${i18next.t('Admin.Page.Inventory.Modal.AddNew.DelButton')}</button></td>
             `;
             tbody.appendChild(tr);
         });
 
           const editable = document.querySelectorAll('.editable')
 
+          // Add event listener to all editable fields
           document.querySelectorAll('.editable').forEach(input => {
             input.addEventListener('change', async (e) => {
                 const id = e.target.getAttribute('data-id');
@@ -439,14 +441,14 @@
                 const value = e.target.value;
 
                 try {
-                    const response = await fetch(`/api/v1/inventory/${itemId}/set${column}`, {
+                    const response = await fetch(`/api/v1/inventory/${itemId}/${column}/set`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': 'Bearer ' + localStorage.getItem('token')
                         },
                         body: JSON.stringify({
-                            [column]: value
+                            "new_val": value
                         })
                     });
 
@@ -477,6 +479,23 @@
           return {};
         }
       }
+
+      const deleteRow = async (id) => {
+            const response = await fetch(`/api/v1/inventory/${id}`, {
+              method: 'DELETE',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+              }
+            });
+
+            if(response.status === 200) {
+              loadTable();
+            } else {
+              alert('Error deleting row');
+            }
+          }
+
       document.addEventListener('DOMContentLoaded', async () => {
         await generatePagination(currentPage, rowsPerPage, loadTable)
 
