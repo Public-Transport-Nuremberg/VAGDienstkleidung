@@ -532,20 +532,25 @@
             loadTable();
           } else if(response.status === 400) {
             if(typeof response_json.reason === "string") {
-              document.getElementById('NewEventErrorLine').innerHTML = '<div class="alert alert-danger">' + i18next.t(`Error.${response_json.message}`) + '</div>';
+              document.getElementById('AddNewErrorLine').innerHTML = '<div class="alert alert-danger">' + i18next.t(`Error.${response_json.message}`) + '</div>';
               return;
             }
-            const input_name = keys[response_json.reason[0].path[0]];
+            const input_name = response_json.reason[0].path[0];
             console.log(input_name)
             const input_type = response_json.reason[0].type;
             for (const key in keys) {
               document.getElementById(keys[key]).classList.remove("is-invalid");
             }
             
-            document.getElementById('NewEventErrorLine').innerHTML = '<div class="alert alert-danger">' + i18next.t(`Error.Joi.${input_type}`, { field: i18next.t(`Events.Modal.NewEvent.${capitalizeFirstLetter(input_name)}`), limit: response_json.reason[0].context?.limit }) + '</div>';
+            document.getElementById('AddNewErrorLine').innerHTML = '<div class="alert alert-danger">' + i18next.t(`Error.Joi.${input_type}`, { field: i18next.t(`Admin.Page.Inventory.Modal.AddNew.${capitalizeFirstLetter(input_name)}`), limit: response_json.reason[0].context?.limit }) + '</div>';
             document.getElementById(keys[input_name]).classList.add("is-invalid");
           } else {
-            alert('Error adding new article');
+            if(Number(response_json.reason) === 23505) {
+              const {columnName, columnValue} = extractUniqueConstraintError(response_json.info);
+              document.getElementById('AddNewErrorLine').innerHTML = '<div class="alert alert-danger">' + i18next.t(`Error.Postgres.23505`, {columnName, columnValue}) + '</div>';
+            } else {
+              alert('Error adding new article');
+            }
           }
         }).catch(error => {
           console.error('Error:', error);

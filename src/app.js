@@ -109,8 +109,8 @@ app.set_error_handler((req, res, error) => {
     process.log.debug(error);
     const outError = {
         message: error.message || "",
-        info: error.info || "",
-        reason: error.reason || "",
+        info: error.info || error.detail || "",
+        reason: error.reason || error.code || "",
         headers: error.headers || false,
         statusCode: error.status || 500, // Default to error 500
         back_url: error.back_url || false,

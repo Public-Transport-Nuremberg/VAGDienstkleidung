@@ -273,6 +273,9 @@
       },
       "required": "{{field}} ist erforderlich"
     },
+    "Postgres": {
+      "23505": "Der Wert {{columnValue}} für {{columnName}} muss einzigartig sein"
+    },
     "NewEventApplyBeforeStart": "Das Anmelde Datum muss vor dem Start Datum liegen",
     "NewEventEndBeforeStart": "Das Start Datum muss vor dem End Datum liegen",
     "PasswordMatch": "Passwörter stimmen nicht überein"

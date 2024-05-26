@@ -157,3 +157,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 });
+
+// Maches a unique constraint error message and returns the column name and value
+const extractUniqueConstraintError = (errorMessage) => {
+    const regex = /Key \(([^)]+)\)=\(([^)]+)\)/;
+    const match = errorMessage.match(regex);
+
+    if (match) {
+        const columnName = match[1];
+        const columnValue = match[2];
+        return {
+            columnName,
+            columnValue
+        };
+    } else {
+        throw new Error("The error message does not match the expected pattern.");
+    }
+}

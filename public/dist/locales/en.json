@@ -48,6 +48,9 @@
         "max": "{{field}} date must be before {{limit}}"
       },
       "required": "{{field}} is required"
+    },
+    "Postgres": {
+      "23505": "Der Wert {{columnValue}} für {{columnName}} muss einzigartig sein"
     }
   },
   "User_Groups": {
