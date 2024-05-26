@@ -32,7 +32,7 @@ const inventorySchema = Joi.object({
     article_number: Joi.string().required(),
     price: Joi.number().integer().min(0).max(100_000).required(),
     description: Joi.sanitizedString().allow(''),
-    gender: Joi.string().valid('B', 'F', 'M').required(),
+    gender: Joi.string().valid('Unisex', 'Female', 'Male').required(),
     stock_xs: Joi.number().integer().min(0).max(100_000).required(),
     stock_s: Joi.number().integer().min(0).max(100_000).required(),
     stock_m: Joi.number().integer().min(0).max(100_000).required(),
@@ -55,18 +55,13 @@ const inventoryStockSetSchema = Joi.object({
 });
 
 router.get('/', verifyRequest('web.admin.inventory.read'), limiter(1), async (req, res) => {
-    try {
-        const { page, limit, sort, order, search } = await inventoryListQuerySchema.validateAsync(req.query);
-        const offset = (page - 1) * limit;
+    const { page, limit, sort, order, search } = await inventoryListQuerySchema.validateAsync(req.query);
+    const offset = (page - 1) * limit;
 
-        const sql_response = await shop.inventory.list(offset, limit, sort, order, search);
-        if (!sql_response) throw new Error('Failed to retrieve inventory data');
+    const sql_response = await shop.inventory.list(offset, limit, sort, order, search);
+    if (!sql_response) throw new Error('Failed to retrieve inventory data');
 
-        res.status(200).json(sql_response);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+    res.status(200).json(sql_response);
 });
 
 router.post('/', verifyRequest('web.admin.inventory.create'), limiter(1), async (req, res) => {

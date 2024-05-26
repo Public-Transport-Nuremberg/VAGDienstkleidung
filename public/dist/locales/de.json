@@ -88,6 +88,7 @@
         }
       },
       "Buttons": {
+        "ShoppingCart": "Warenkorb",
         "ToggleColor": {
           "Light": "Helle Ansicht",
           "Dark": "Dunkle Ansicht"
@@ -170,6 +171,34 @@
       }
     }
   },
+  "Shop": {
+    "Headline": "Shop",
+    "Settings": {
+      "PriceRange": "Preisbereich",
+      "CurrentPrice": "Preisbereich: Von {{minValue}} bis {{maxValue}} Punkten",
+      "ArticleType": "Artikeltyp"
+    },
+    "Price_one": "{{count}} Punkt",
+    "Price_other": "{{count}} Punkte",
+    "Individual_Price_one": "Kostet {{count}} Punkt pro Artikel",
+    "Individual_Price_other": "Kostet {{count}} Punkte pro Artikel",
+    "Total_Price_one": "Gesamtpreis: {{count}} Punkt",
+    "Total_Price_other": "Gesamtpreis: {{count}} Punkte",
+    "Toal_Items_one": "Gesamtanzahl: {{count}} Artikel",
+    "Toal_Items_other": "Gesamtanzahl: {{count}} Artikel",
+    "Modal": {
+      "Headline": "Zum Warenkorb hinzufügen",
+      "ItemDetails": "Artikeldetails",
+      "ItemDescription": "Artikelbeschreibung",
+      "ChooseSize": "Größe wählen",
+      "Price": "Preis",
+      "ChooseAmount": "Anzahl wählen",
+      "Button": {
+        "Order": "Bestellen",
+        "Cancel": "Abbrechen"
+      }
+    }
+  },
   "Admin": {
     "Headlines": {
       "Userlist": "Nutzerverwaltung",
@@ -194,6 +223,7 @@
             "ProductImg": "Produktbild",
             "Article": "Artikel Name",
             "ArticleType": "Artikeltyp",
+            "ArticleType_All": "Alle",
             "ArticleType_TShirt": "T-Shirt",
             "ArticleType_Polo": "Polo",
             "ArticleType_Hoodie": "Hoodie",
@@ -206,7 +236,7 @@
             "ArticleType_Bag": "Tasche",
             "ArticleType_Accessoires": "Accessoires",
             "Gender": "Geschlecht",
-            "Gender_Both": "Unisex",
+            "Gender_Unisex": "Unisex",
             "Gender_Female": "Frauen",
             "Gender_Male": "Männer",
             "ArticleNumber": "Artikel Nummer",

@@ -50,6 +50,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error('Error:', error);
     });
 
+    displayCartOverview(); // Display the cart overview
+
     /* Translate all elements marked with spesific html tags */
     document.querySelectorAll("[data-translate]").forEach((element) => {
         const key = element.getAttribute("data-translate");
