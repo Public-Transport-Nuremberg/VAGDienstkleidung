@@ -30,7 +30,7 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-            <a href="/dashboard">
+            <a href="/index">
               <img src="<%= domain %>/dist/logo-transparent.png" width="110" height="32" alt="EBG" class="navbar-brand-image">
               <div data-translate="Dashboard.Header.Pagename">
             </a>
@@ -169,7 +169,7 @@
           <div class="container-xl">
             <div class="row g-2 align-items-center">
               <div class="col">
-                <h2 class="page-title" data-translate="Admin.Headlines.Userlist"></h2>
+                <h2 class="page-title" data-translate="Admin.Headlines.Inventory"></h2>
               </div>
               <!-- Page title actions -->
               <div class="col-auto ms-auto d-print-none">
@@ -182,6 +182,10 @@
                       </span>
                     </div>
                   </div>
+                  <a class="btn btn-primary" class="btn" data-bs-toggle="modal" data-bs-target="#newArticleMordal">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+                  <div data-translate="Inventory.Body.Head.AddButton"></div>
+                  </a>
                 </div>
               </div>
             </div>
@@ -196,12 +200,16 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <th><button class="table-sort" data-sort="sort-first_name" data-translate="Admin.Page.Userlist.Table.FirstName"></button></th>
-                        <th><button class="table-sort" data-sort="sort-last_name" data-translate="Admin.Page.Userlist.Table.LastName"></button></th>
-                        <th><button class="table-sort" data-sort="sort-username" data-translate="Admin.Page.Userlist.Table.Username"></button></th>
-                        <th><button class="table-sort" data-sort="sort-email" data-translate="Admin.Page.Userlist.Table.Email"></button></th>
-                        <th><button class="table-sort" data-sort="sort-user_group" data-translate="Admin.Page.Userlist.Table.UserGroup"></button></th>
-                        <th><button class="table-sort" data-sort="sort-credit" data-translate="Admin.Page.Userlist.Table.Credit"></button></th>
+                        <th><button class="table-sort" data-sort="sort-article" data-translate="Admin.Page.Inventory.Table.Article"></button></th>
+                        <th><button class="table-sort" data-sort="sort-article_type" data-translate="Admin.Page.Inventory.Table.ArticleType"></button></th>
+                        <th><button class="table-sort" data-sort="sort-article_number" data-translate="Admin.Page.Inventory.Table.ArticleNumber"></button></th>
+                        <th><button class="table-sort" data-sort="sort-price" data-translate="Admin.Page.Inventory.Table.Price"></button></th>
+                        <th><button class="table-sort" data-sort="sort-stock_xs" data-translate="Admin.Page.Inventory.Table.Stock_xs"></button></th>
+                        <th><button class="table-sort" data-sort="sort-stock_s" data-translate="Admin.Page.Inventory.Table.Stock_s"></button></th>
+                        <th><button class="table-sort" data-sort="sort-stock_m" data-translate="Admin.Page.Inventory.Table.Stock_m"></button></th>
+                        <th><button class="table-sort" data-sort="sort-stock_l" data-translate="Admin.Page.Inventory.Table.Stock_l"></button></th>
+                        <th><button class="table-sort" data-sort="sort-stock_xl" data-translate="Admin.Page.Inventory.Table.Stock_xl"></button></th>
+                        <th><button class="table-sort" data-sort="sort-stock_xxl" data-translate="Admin.Page.Inventory.Table.Stock_xxl"></button></th>
                       </tr>
                     </thead>
                     <tbody class="table-tbody">
@@ -237,6 +245,145 @@
         </footer>
       </div>
     </div>
+    <!-- Modal(s) -->
+    <div class="modal modal-blur fade" id="newArticleMordal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" data-translate="Events.Modal.NewEvent.Title"></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            
+            <div class="row mb-3 align-items-end">
+              <div class="col-auto">
+                <a class="avatar avatar-upload rounded">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+                  <span class="avatar-upload-text" data-translate="Admin.Page.Inventory.Modal.AddNew.ProductImg"></span>
+                </a>
+              </div>
+              <div class="col">
+                <label class="form-label" data-translate="Admin.Page.Inventory.Modal.AddNew.Article"></label>
+                <input type="text" id="AddNewArticle" data-translate-placeholder="Admin.Page.Inventory.Modal.AddNew.Placeholder.Article" class="form-control" />
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-lg-3">
+                <div class="mb-3">
+                  <label class="form-label" data-translate="Admin.Page.Inventory.Modal.AddNew.ArticleType"></label>
+                  <select type="form-select" id="AddNewArticleType" class="form-control">
+                    <option value="TShirt" data-translate="Admin.Page.Inventory.Modal.AddNew.ArticleType_TShirt" selected></option>
+                    <option value="Hoodie" data-translate="Admin.Page.Inventory.Modal.AddNew.ArticleType_Hoodie"></option>
+                    <option value="Polo" data-translate="Admin.Page.Inventory.Modal.AddNew.ArticleType_Polo"></option>
+                    <option value="Jacket" data-translate="Admin.Page.Inventory.Modal.AddNew.ArticleType_Jacket"></option>
+                    <option value="Pants" data-translate="Admin.Page.Inventory.Modal.AddNew.ArticleType_Pants"></option>
+                    <option value="Shorts" data-translate="Admin.Page.Inventory.Modal.AddNew.ArticleType_Shorts"></option>
+                    <option value="Cap" data-translate="Admin.Page.Inventory.Modal.AddNew.ArticleType_Cap"></option>
+                    <option value="Bag" data-translate="Admin.Page.Inventory.Modal.AddNew.ArticleType_Bag"></option>
+                    <option value="Shoes" data-translate="Admin.Page.Inventory.Modal.AddNew.ArticleType_Shoes"></option>
+                    <option value="Socks" data-translate="Admin.Page.Inventory.Modal.AddNew.ArticleType_Socks"></option>
+                    <option value="Accessoires" data-translate="Admin.Page.Inventory.Modal.AddNew.ArticleType_Accessoires"></option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="mb-3">
+                  <label class="form-label" data-translate="Admin.Page.Inventory.Modal.AddNew.Gender"></label>
+                  <select type="form-select" id="AddNewGender" class="form-control">
+                    <option value="B" data-translate="Admin.Page.Inventory.Modal.AddNew.Gender_Both" selected></option>
+                    <option value="F" data-translate="Admin.Page.Inventory.Modal.AddNew.Gender_Female"></option>
+                    <option value="M" data-translate="Admin.Page.Inventory.Modal.AddNew.Gender_Male"></option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="mb-4">
+                  <label class="form-label" data-translate="Admin.Page.Inventory.Modal.AddNew.ArticleNumber"></label>
+                  <input type="text" data-translate-placeholder="Admin.Page.Inventory.Modal.AddNew.Placeholder.ArticleNumber" id="AddNewArticleNumber" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-2">
+                <div class="mb-2">
+                  <label class="form-label" data-translate="Admin.Page.Inventory.Modal.AddNew.Price"></label>
+                  <input type="number" data-translate-placeholder="Admin.Page.Inventory.Modal.AddNew.Placeholder.Price" id="AddNewPrice" class="form-control">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="mb-1">
+                  <label class="form-label" data-translate="Admin.Page.Inventory.Modal.AddNew.Stock_xs"></label>
+                  <input type="text" id="AddNewStockXS" value="0" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="mb-1">
+                  <label class="form-label" data-translate="Admin.Page.Inventory.Modal.AddNew.Stock_s"></label>
+                  <input type="text" id="AddNewStockS" value="0" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="mb-3">
+                  <label class="form-label" data-translate="Admin.Page.Inventory.Modal.AddNew.Stock_m"></label>
+                  <input type="text" id="AddNewStockM" value="0" class="form-control">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="mb-1">
+                  <label class="form-label" data-translate="Admin.Page.Inventory.Modal.AddNew.Stock_l"></label>
+                  <input type="text" id="AddNewStockL" value="0" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="mb-1">
+                  <label class="form-label" data-translate="Admin.Page.Inventory.Modal.AddNew.Stock_xl"></label>
+                  <input type="text" id="AddNewStockXL" value="0" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="mb-3">
+                  <label class="form-label" data-translate="Admin.Page.Inventory.Modal.AddNew.Stock_xxl"></label>
+                  <input type="text" id="AddNewStockXXL" value="0" class="form-control">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="mb-4">
+                  <label class="form-label" data-translate="Admin.Page.Inventory.Modal.AddNew.Description"></label>
+                  <textarea class="form-control" id="AddNewDescription" data-translate-placeholder="Admin.Page.Inventory.Modal.AddNew.Placeholder.Description" rows="3"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-12">
+                <div id="AddNewErrorLine"></div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a class="btn btn-link link-secondary" data-bs-dismiss="modal" data-translate="Admin.Page.Inventory.Modal.AddNew.CancelButton"></a>
+            <a class="btn btn-primary ms-auto" id="AddNewSubmitBtn">
+              <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <path d="M12 5l0 14" />
+                  <path d="M5 12l14 0" />
+              </svg>
+              <span data-translate="Admin.Page.Inventory.Modal.AddNew.AddButton"></span>
+            </a>          
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Libs JS -->
     <!-- Tabler Core -->
     <script src="<%= domain %>/appjs/permission.js"></script>
@@ -248,13 +395,13 @@
     <script>
       const rowsPerPage = 10;
       let currentPage = 1;
-      let sortColumn = 'last_name';
+      let sortColumn = 'article_number';
       let sortOrder = 'asc';
 
       const loadTable = async (in_currentPage) => {
         currentPage = in_currentPage ?? currentPage; // Update currentPage
         const search = document.getElementById("PageSearch").value;
-        const response = await fetch(`/api/v1/admin_user?page=${currentPage}&limit=${rowsPerPage}&sort=${sortColumn}&order=${sortOrder}&search=${search}`, {
+        const response = await fetch(`/api/v1/inventory?page=${currentPage}&limit=${rowsPerPage}&sort=${sortColumn}&order=${sortOrder}&search=${search}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -266,52 +413,63 @@
           const data = await response.json()
           const tbody = document.querySelector('.table-tbody')
           tbody.innerHTML = ''
-          data.table.forEach(user => {
-            const tr = document.createElement('tr')
-            // Make Credits editable, set user id as data attribute and give class to make it editable
+          data.table.forEach(item => {
+            const tr = document.createElement('tr');
             tr.innerHTML = `
-              <td class="sort-first_name">${user.first_name}</td>
-              <td class="sort-last_name">${user.last_name}</td>
-              <td class="sort-username">${user.username}</td>
-              <td class="sort-email">${user.email}</td>
-              <td class="sort-user_group">${i18next.t(`User_Groups.${user.user_group}`)}</td>
-              <td class="sort-credit"><input type="number" class="form-control editable" value="${user.credit}" data-id="${user.id}"></td>
-            `
-            tbody.appendChild(tr)
-          })
+                <td class="sort-article">${item.article}</td>
+                <td class="sort-article_type">${item.article_type}</td>
+                <td class="sort-article_number">${item.article_number}</td>
+                <td class="sort-price"><input type="number" class="form-control editable" value="${item.price}" data-id="price/${item.id}"></td>
+                <td class="sort-stock_xs"><input type="number" class="form-control editable" value="${item.stock_xs}" data-id="stock_xs/${item.id}"></td>
+                <td class="sort-stock_s"><input type="number" class="form-control editable" value="${item.stock_s}" data-id="stock_s/${item.id}"></td>
+                <td class="sort-stock_m"><input type="number" class="form-control editable" value="${item.stock_m}" data-id="stock_m/${item.id}"></td>
+                <td class="sort-stock_l"><input type="number" class="form-control editable" value="${item.stock_l}" data-id="stock_l/${item.id}"></td>
+                <td class="sort-stock_xl"><input type="number" class="form-control editable" value="${item.stock_xl}" data-id="stock_xl/${item.id}"></td>
+                <td class="sort-stock_xxl"><input type="number" class="form-control editable" value="${item.stock_xxl}" data-id="stock_xxl/${item.id}"></td>
+            `;
+            tbody.appendChild(tr);
+        });
 
           const editable = document.querySelectorAll('.editable')
 
-          editable.forEach(input => {
+          document.querySelectorAll('.editable').forEach(input => {
             input.addEventListener('change', async (e) => {
-              const id = e.target.getAttribute('data-id')
-              const credit = e.target.value
+                const id = e.target.getAttribute('data-id');
+                const [column, itemId] = id.split('/');
+                const value = e.target.value;
 
-              const credit_request = await fetch(`/api/v1/admin_user/${id}/setCredit`, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + localStorage.getItem('token')
-                },
-                body: JSON.stringify({
-                  credit
-                })
-              })
+                try {
+                    const response = await fetch(`/api/v1/inventory/${itemId}/set${column}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+                        body: JSON.stringify({
+                            [column]: value
+                        })
+                    });
 
-              if(credit_request.status === 200) {
-                e.target.classList.add('is-valid');
-                setTimeout(() => {
-                  e.target.classList.remove('is-valid');
-                }, 1000)
-              } else {
-                e.target.classList.add('is-invalid');
-                setTimeout(() => {
-                  e.target.classList.remove('is-invalid');
-                }, 1000)
-              }
-
-            })
-          })
+                    if (response.status === 200) {
+                        e.target.classList.add('is-valid');
+                        setTimeout(() => {
+                            e.target.classList.remove('is-valid');
+                        }, 1000);
+                    } else {
+                        e.target.classList.add('is-invalid');
+                        setTimeout(() => {
+                            e.target.classList.remove('is-invalid');
+                        }, 1000);
+                    }
+                } catch (error) {
+                    e.target.classList.add('is-invalid');
+                    setTimeout(() => {
+                        e.target.classList.remove('is-invalid');
+                    }, 1000);
+                    console.error('Error:', error);
+                }
+            });
+          });
 
           return data;
         } else {
@@ -335,6 +493,64 @@
               });
             });
       })
+
+      // Add new article Mordal submit Code
+      const keys = {
+        "article": "AddNewArticle",
+        "article_type": "AddNewArticleType",
+        "article_number": "AddNewArticleNumber",
+        "price": "AddNewPrice",
+        "gender": "AddNewGender",
+        "stock_xs": "AddNewStockXS",
+        "stock_s": "AddNewStockS",
+        "stock_m": "AddNewStockM",
+        "stock_l": "AddNewStockL",
+        "stock_xl": "AddNewStockXL",
+        "stock_xxl": "AddNewStockXXL",
+        "description": "AddNewDescription"
+      }
+
+      document.getElementById("AddNewSubmitBtn").addEventListener("click", function() {
+        const data = {}
+        for (const key in keys) {
+          data[key] = document.getElementById(keys[key]).value
+        }
+        fetch('/api/v1/inventory', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+          },
+          body: JSON.stringify(data)
+        }).then(async (response) => {
+          const response_json = await response.json();
+          if(response.status === 200) {
+            for (const key in keys) {
+              document.getElementById(keys[key]).classList.remove("is-invalid");
+            }
+            closeModal("newArticleMordal");
+            loadTable();
+          } else if(response.status === 400) {
+            if(typeof response_json.reason === "string") {
+              document.getElementById('NewEventErrorLine').innerHTML = '<div class="alert alert-danger">' + i18next.t(`Error.${response_json.message}`) + '</div>';
+              return;
+            }
+            const input_name = keys[response_json.reason[0].path[0]];
+            console.log(input_name)
+            const input_type = response_json.reason[0].type;
+            for (const key in keys) {
+              document.getElementById(keys[key]).classList.remove("is-invalid");
+            }
+            
+            document.getElementById('NewEventErrorLine').innerHTML = '<div class="alert alert-danger">' + i18next.t(`Error.Joi.${input_type}`, { field: i18next.t(`Events.Modal.NewEvent.${capitalizeFirstLetter(input_name)}`), limit: response_json.reason[0].context?.limit }) + '</div>';
+            document.getElementById(keys[input_name]).classList.add("is-invalid");
+          } else {
+            alert('Error adding new article');
+          }
+        }).catch(error => {
+          console.error('Error:', error);
+        });
+      });
     </script>
   </body>
 </html>
