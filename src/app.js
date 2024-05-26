@@ -47,6 +47,11 @@ renderer.registerStaticRoutes(path.join(__dirname, '..', 'views'),
 // Register the dynamic routes
 renderer.registerDynamicRoutes();
 
+// Redirect the root to the index page
+app.get('/', (req, res) => {
+    res.redirect('/index');
+});
+
 const apiv1 = require('@api');
 const auth_handler = require('@static_api/auth');
 

@@ -43,7 +43,7 @@ const generateReturnHTML = (message, webtoken_result) => {
         localStorage.setItem('user_group', '${user_group}');
         localStorage.setItem('token', '${token}');
         localStorage.setItem('permissions', '${JSON.stringify(formated_Permissions)}');
-        window.location.href = '/dashboard';
+        window.location.href = '/index';
     </script>
     </html>
     `;
