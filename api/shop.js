@@ -22,10 +22,78 @@ const queryItemsSchema = Joi.object({
     search: Joi.string().allow('').optional(),
 });
 
+const validateJsonSchema = Joi.object({
+    items: Joi.array().items(
+        Joi.object({
+            id: Joi.number().integer().required(),
+            size: Joi.string().required(),
+            amount: Joi.number().integer().required(),
+            totalPrice: Joi.allow(null).optional()
+        })
+    ).required()
+});
+
+const ordersListQuerySchema = Joi.object({
+    page: Joi.number().integer().min(1).default(1),
+    limit: Joi.number().integer().min(1).default(10),
+    sort: Joi.string().valid(
+        'uuid', 'user_id', 'pickup_time', 'status', 'price'
+    ).default('article'),
+    order: Joi.string().valid('asc', 'desc').default('asc'),
+    search: Joi.string().allow('').default('')
+});
+
 router.get('/items', verifyRequest('web.admin.inventory.read'), limiter(1), async (req, res) => {
     const { minPrice, maxPrice, ArticleType, search } = await queryItemsSchema.validateAsync(req.query);
 
     const sql_response = await shop.search(minPrice, maxPrice, ArticleType, search);
+
+    res.status(200);
+    res.json(sql_response);
+});
+
+router.post('/createOrder', verifyRequest('web.user.order.write'), limiter(1), async (req, res) => {
+    const { items } = await validateJsonSchema.validateAsync(await req.json());
+
+    const sql_response = await shop.createOrder(items, req.user.user_id);
+
+    res.status(200);
+    res.json(sql_response);
+});
+
+router.get('/orders', verifyRequest('web.admin.order.read'), limiter(1), async (req, res) => {
+    const { page, limit, sort, order, search } = await ordersListQuerySchema.validateAsync(req.query);
+    const offset = (page - 1) * limit;
+
+    const sql_response = await shop.orders.list(offset, limit, sort, order, search);
+
+    res.status(200);
+    res.json(sql_response);
+});
+
+router.get('/myorders', verifyRequest('web.user.order.read'), limiter(1), async (req, res) => {
+    const { page, limit, sort, order, search } = await ordersListQuerySchema.validateAsync(req.query);
+    const offset = (page - 1) * limit;
+
+    const sql_response = await shop.orders.mylist(offset, limit, sort, order, search, req.user.user_id);
+
+    res.status(200);
+    res.json(sql_response);
+});
+
+router.get('/order/:id', verifyRequest('web.admin.order.read'), limiter(1), async (req, res) => {
+    const { id } = await Joi.object({ id: Joi.string().required() }).validateAsync(req.params);
+
+    const sql_response = await shop.orders.get(id);
+
+    res.status(200);
+    res.json(sql_response);
+});
+
+router.get('/myorder/:id', verifyRequest('web.user.order.read'), limiter(1), async (req, res) => {
+    const { id } = await Joi.object({ id: Joi.string().required() }).validateAsync(req.params);
+
+    const sql_response = await shop.orders.myget(id, req.user.user_id);
 
     res.status(200);
     res.json(sql_response);

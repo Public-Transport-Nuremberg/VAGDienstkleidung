@@ -61,7 +61,7 @@
                     <path d="M17 17h-11v-14h-2"/>
                     <path d="M6 5l14 1l-1 7h-13"/>
                   </svg>
-                  <span class="badge bg-red"></span>
+                  
                 </a>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end" style="width: 400px;">
                   <div class="card">
@@ -288,7 +288,7 @@
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         
         const cartItem = {
-          id: item.id,
+          id: item,
           size: size,
           amount: amount,
           totalPrice: totalPrice

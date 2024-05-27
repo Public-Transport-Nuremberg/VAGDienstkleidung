@@ -114,18 +114,12 @@
           <div class="container-xl">
             <div class="row g-2 align-items-center">
               <div class="col">
-                <h2 class="page-title" data-translate="Cart.Headline"></h2>
+                <h2 class="page-title" data-translate="Admin.Headlines.Order"></h2>
               </div>
               <div class="col-auto ms-auto d-print-none">
                 <div class="d-flex">
                   <div class="me-3">
                     <div id="FinalPriceShop"></div>
-                  </div>
-                  <div class="me-3">
-                    <a id="ShopButton" class="btn btn-primary" class="btn" onclick="makeOrder()">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
-                    <div data-translate="Shop.BuyButton"></div>
-                    </a>
                   </div>
                 </div>
               </div>
@@ -239,6 +233,7 @@
       };
 
       const getUniqueIds = (items) => {
+        
         const ids = new Set();
 
         items.forEach(item => {
@@ -249,6 +244,7 @@
       }
 
       function renderCards(items, inventoryMap) {
+        console.log(items, inventoryMap)
       const container = document.getElementById('inventory-container');
       container.innerHTML = ''; // Clear existing cards
 
@@ -322,15 +318,37 @@
       document.getElementById('FinalPriceShop').innerHTML = i18next.t('Shop.Total_Price', {count: finalPrice});
     }
 
-      const fetchInventory = async () => {
-        const items = deduplicateAndSum();
-        const response = await fetch('/api/v1/inventory/list', {
-          method: 'POST',
+      const fetchInventory = async (order_data) => {
+          const response = await fetch('/api/v1/inventory/list', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+            body: JSON.stringify({ ids: getUniqueIds(order_data) })
+          });
+
+          if (!response.ok) {
+            console.error('Failed to fetch inventory data');
+            return;
+          }
+
+          const inventory = await response.json();
+          const inventoryMap = inventory.reduce((map, item) => {
+            map[item.id] = item;
+            return map;
+          }, {});
+
+          renderCards(order_data, inventoryMap);
+        }
+
+      const fetchOrder = async () => {
+        const response = await fetch(`/api/v1/shop/myorder/<%= params.uuid %>`, {
+          method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('token')
-          },
-          body: JSON.stringify({ ids: getUniqueIds(items) })
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
         });
 
         if (!response.ok) {
@@ -338,44 +356,11 @@
           return;
         }
 
-        const inventory = await response.json();
-        const inventoryMap = inventory.reduce((map, item) => {
-          map[item.id] = item;
-          return map;
-        }, {});
-
-        renderCards(items, inventoryMap);
+        const json_response = await response.json();
+        fetchInventory(JSON.parse(json_response[0].order_data));
       }
 
-      const makeOrder = async () => {
-        document.getElementById('ShopButton').classList.add('disabled');
-        const items = deduplicateAndSum();
-        const response = await fetch('/api/v1/shop/createOrder', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('token')
-          },
-          body: JSON.stringify({ items })
-        });
-
-        if(response.statusCode === 200) {
-          // Make butto green to signal succsess
-          document.getElementById('ShopButton').classList.add('btn-success');
-          localStorage.removeItem('cart');
-          setTimeout(() => {
-            window.location.href = '/index';
-          }, 3000);
-        } else {
-          json = await response.json();
-          // Make button red to signal error
-          document.getElementById('ShopButton').classList.add('btn-danger');
-          alert(json.message);
-          localStorage.removeItem('cart');
-        }
-      }
-
-    document.addEventListener('DOMContentLoaded', fetchInventory);
+    document.addEventListener('DOMContentLoaded', fetchOrder);
     </script>
   </body>
 </html>

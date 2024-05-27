@@ -45,6 +45,10 @@ const inventoryIdSchema = Joi.object({
     id: Joi.number().integer().min(1).required()
 });
 
+const inventoryIdListSchema = Joi.object({
+    ids: Joi.array().items(Joi.number().integer()).required()
+  });
+
 const inventoryStockSchema = Joi.object({
     id: Joi.number().integer().min(1).required(),
     stock: Joi.string().valid('price', 'stock_xs', 'stock_s', 'stock_m', 'stock_l', 'stock_xl', 'stock_xxl').required()
@@ -90,6 +94,16 @@ router.post('/:id/:stock/set', verifyRequest('web.admin.inventory.write'), limit
     const sql_response = await shop.inventory.setCollumValue(id, stock, new_val);
 
     res.status(200).json({ [stock]: sql_response[stock] });
+});
+
+router.post('/list', verifyRequest('web.admin.inventory.read'), limiter(1), async (req, res) => {
+    const value = await inventoryIdListSchema.validateAsync(await req.json());
+  
+    const ids = value.ids;
+    const sql_response = await shop.inventory.byidlist(ids);
+    if (!sql_response) throw new Error('Failed to retrieve inventory data');
+
+    res.status(200).json(sql_response);
 });
 
 module.exports = {

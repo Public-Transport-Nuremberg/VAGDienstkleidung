@@ -192,26 +192,6 @@ const toDateTimeLocalString = (date) => {
 }
 
 /**
- * Shows the current total of the cart in the NAV Bar
- */
-const displayCartOverview = () => {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let totalItems = 0;
-    let totalPrice = 0;
-
-    cart.forEach(cartItem => {
-        totalItems += Number(cartItem.amount);
-        totalPrice += Number(cartItem.totalPrice);
-    });
-
-    console.log(`Total items: ${totalItems}, Total price: ${totalPrice}`);
-
-    // Example logic to update the UI with the cart overview
-    document.getElementById('CartHeaderElementAmount').innerText = i18next.t('Shop.Toal_Items', { count: totalItems });
-    document.getElementById('CartHeaderElementCost').innerText = i18next.t('Shop.Total_Price', { count: totalPrice });
-}
-
-/**
  * Debauce function to limit the number of times a function is called
  * @param {Function} func 
  * @param {number} timeout 

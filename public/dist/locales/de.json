@@ -171,8 +171,12 @@
       }
     }
   },
+  "Cart": {
+    "Headline": "Warenkorb"
+  },
   "Shop": {
     "Headline": "Shop",
+    "BuyButton": "Kaufen",
     "Settings": {
       "PriceRange": "Preisbereich",
       "CurrentPrice": "Preisbereich: Von {{minValue}} bis {{maxValue}} Punkten",
@@ -203,9 +207,19 @@
     "Headlines": {
       "Userlist": "Nutzerverwaltung",
       "Inventory": "Lagerbestand",
-      "Orders": "Bestellungen"
+      "Orders": "Bestellungen",
+      "Order": "Bestellung"
     },
     "Page": {
+      "Orders": {
+        "Table": {
+          "UUID": "UUID",
+          "User_id": "Benutzer ID",
+          "Price": "Preis",
+          "Pickup_time": "Abholzeit",
+          "Status": "Status"
+        }
+      },
       "Userlist": {
         "Table": {
           "FirstName": "Vorname",
@@ -248,6 +262,12 @@
             "Stock_l": "Lagerbestand L",
             "Stock_xl": "Lagerbestand XL",
             "Stock_xxl": "Lagerbestand XXL",
+            "stock_xs": "Größe: XS",
+            "stock_s": "Größe: S",
+            "stock_m": "Größe: M",
+            "stock_l": "Größe: L",
+            "stock_xl": "Größe: XL",
+            "stock_xxl": "Größe: XXL",
             "Description": "Beschreibung",
             "AddButton": "Produkt hinzufügen",
             "CancelButton": "Abbrechen",

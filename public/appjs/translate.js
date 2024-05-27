@@ -24,6 +24,27 @@ const getLang = async () => {
     return data;
 }
 
+/**
+ * Shows the current total of the cart in the NAV Bar
+ */
+const displayCartOverview = () => {
+    if(document.getElementById('CartHeaderElementAmount') == null) return;
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let totalItems = 0;
+    let totalPrice = 0;
+
+    cart.forEach(cartItem => {
+        totalItems += Number(cartItem.amount);
+        totalPrice += Number(cartItem.totalPrice);
+    });
+
+    console.log(`Total items: ${totalItems}, Total price: ${totalPrice}`);
+
+    // Example logic to update the UI with the cart overview
+    document.getElementById('CartHeaderElementAmount').innerText = i18next.t('Shop.Toal_Items', { count: totalItems });
+    document.getElementById('CartHeaderElementCost').innerText = i18next.t('Shop.Total_Price', { count: totalPrice });
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
     const langFile = await getLang();
     i18next.init({
@@ -36,21 +57,23 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
-    fetch('/api/v1/user/credit', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('token')
-        }
-    }).then(response => response.json()).then(data => {
-        if (data.credit != undefined) {
-            document.getElementById('UserCreditamount').innerText = i18next.t('Dashboard.Header.Buttons.Credit', { count: Number(data.credit) });
-        }
-    }).catch((error) => {
-        console.error('Error:', error);
-    });
+    if (localStorage.getItem('token') != null) {
+        fetch('/api/v1/user/credit', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        }).then(response => response.json()).then(data => {
+            if (data.credit != undefined) {
+                document.getElementById('UserCreditamount').innerText = i18next.t('Dashboard.Header.Buttons.Credit', { count: Number(data.credit) });
+            }
+        }).catch((error) => {
+            console.error('Error:', error);
+        });
 
-    displayCartOverview(); // Display the cart overview
+        if (document.getElementById('CartHeaderElementAmount') != null) displayCartOverview(); // Display the cart overview
+    }
 
     /* Translate all elements marked with spesific html tags */
     document.querySelectorAll("[data-translate]").forEach((element) => {
