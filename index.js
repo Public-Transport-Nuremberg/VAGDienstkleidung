@@ -9,8 +9,6 @@ const { log } = require('@lib/logger');
 
 const fs = require('fs');
 
-console.log(process.env)
-
 process.log = {};
 process.log = log;
 
