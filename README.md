@@ -1,49 +1,33 @@
-# Main Web portal for the EBG association
+# Small Fun Project I Wanted to Add to a Job Application
 
-## Features
-- [ ] User management
-- [ ] Member management
-- [ ] Financial processing for members
-- [ ] Event management
-- [ ] Project communities
-- [ ] Pushnotification Hub (Split Service)
-- [ ] Server monitoring tool (Split Service)
-  - [ ] Systemctl monitoring
-  - [ ] Crontab monitoring
-  - [ ] Automatic backups + monitoring
-  - [ ] Resources, Uptime, Network, IO
-  - [ ] Web server config creation / maintaining
-  - [ ] SMART Disk Monitoring
-  - [ ] Package managers
-- [ ] Application Monitoring (Split Service)
-  - [ ] Uptime
-  - [ ] SSL
-- [ ] Virtual Server management (Proxmox)
-- [ ] Game server management (Pterodactyl)
-- [ ] Pay what you want system
-# Documentation
+VAG published a job application for someone to build a webshop for Dienstkleidung (service clothing), so I thought, "What can I build within 8 hours?" and this is what I made.
 
-## View Rendering
+It's not perfect or bug-free, but it works somehow.
 
-Pages are using FS-based routing. A new folder adds a new depth and `_id_` will be encoded to the `param.id` value that's used in the page rendering. For example, `/event/myEventName` uses this custom value for rendering.
+I was hoping to at least get some funny reason why I got rejected, but sadly, I did not. Oh well, I didn't expect anything anyway, if I'm honest.
+However, I'll do something like this again if I feel like it, lol.
 
-The view renderer has two modes:
-1. **Static**: Static pages are usually `/home`, for example. These are generated during runtime when the server starts and then served from an in-memory cache.
-2. **Dynamic**: Dynamic pages are generated when requested and are cached for 60 seconds by default (configurable via the `DYNAMICVIEWCACHE_TTL` environment variable, in seconds).
+## Funfact
+I´ve had this [Song](https://open.spotify.com/intl-de/track/71dKXvxv8d5OHRadLUiHSk?si=bbe0378e4a3946db) on repeat for 6h37m during coding this.
 
-## API Response Cache
+# Rejection (Standard)
+Sehr geehrter XXXX XXXXXXXXX,  
 
-You can import the middleware `publicStaticCache` in any API route you like. However, there are a few things to consider:
+vielen Dank für Ihr Interesse an der Stelle als Datenbankadministrator (m/w/d).  
 
-### Middleware Position
-The middleware needs to be placed:
-- After the rate-limiting middleware.
-- If custom parameters requiring `req.user` are used, `verifyRequest` must be placed before this middleware.
+Nach Auswertung aller Bewerbungsunterlagen müssen wir Ihnen leider mitteilen, dass wir uns in diesem Auswahlverfahren nicht für Sie entscheiden konnten. Wir laden Sie ein, weiterhin unseren internen Stellenmarkt zu beobachten.  
 
-### Middleware Parameters
-The middleware has three parameters:
-1. **Duration**: The time the response should be cached in milliseconds.
-2. **objOptions**: An array listing all important values to consider from the `req` object. For example, if you cache a search with `/api/users?username=Bolver`, this should be listed. Otherwise, if a value for `?username=Vi` is currently cached, it will respond with that result, which would be incorrect. The array takes strings; if you want to refer to `req.user.user_id`, you would write `user.user_id`.
-3. **overwrite**: A string that supports parameter formatting like `myCache:id`. When `params.id` is present, it will be filled during middleware execution. This is useful when something changes, and you need to force update the cache. For instance, `/api/users` lists all users, but after making `/api/user/add?user=BolverBlitz`, this user would be missing from `/api/users` until the cache time runs out. To fix this, write the same string into the `writeOverwriteCacheKey` function after you change a value in the database.
+Ihre Bewerbungsunterlagen wurden elektronisch erfasst und werden entsprechend den geltenden datenschutzrechtlichen Vorschriften behandelt und nach Abschluss des Verfahrens gelöscht. Bitte beachten Sie hierzu unsere Hinweise zum Datenschutz und Widerspruchsrecht.  
 
+Wir wünschen Ihnen alles Gute.  
 
+Freundliche Grüße  
+
+XXXX XXXX   
+VAG Verkehrs-Aktiengesellschaft  
+Referent Recruiting  
+Personalmanagement - Team Recruiting  
+Telefon: 0911 XXX XXXX | Fax: Why is this empty????  
+
+# Waka Time Stats of the Project:
+![grafik](https://github.com/Public-Transport-Nuremberg/VAGDienstkleidung/assets/35345288/03bcdf98-9078-45d6-a6a0-0c9e58df090d)
